@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcImagenService";
+
+package imagen;
+
+// The imagen service definition.
+service AutorImagenService {
+  // Guarda una imagen
+  rpc GuardarImagen (ImagenRequest) returns (Respuesta);
+}
+
+// El mensaje de solicitud que contiene el contenido de la imagen.
+message ImagenRequest {
+  bytes contenido = 1;
+}
+
+// El mensaje de respuesta que contiene la confirmación.
+message Respuesta {
+  string mensaje = 1;
+}
