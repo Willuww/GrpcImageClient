@@ -11,30 +11,23 @@ namespace GrpcImageClient
         static async Task Main(string[] args)
         {
             // Configura la dirección del servidor gRPC
-            using var channel = GrpcChannel.ForAddress("http://localhost:5276");
-            var client = new AutorImagenService.AutorImagenServiceClient(channel);
+            using var channel = GrpcChannel.ForAddress("http://localhost:5276"); // Dirección del servidor gRPC
+            var client = new AutorImagenService.AutorImagenServiceClient(channel); // Crea el cliente gRPC
 
-            // Especifica la ruta de la imagen
-            var imagePath = @"C:\Users\joelb\Desktop\IMG-20181102-WA0003.jpg"; 
-            
-            // Verifica si el archivo existe
-            if (!File.Exists(imagePath))
-            {
-                Console.WriteLine("El archivo no existe: " + imagePath);
-                return;
-            }
+            // Ruta de la imagen
+            var imagePath = @"C:\Users\joelb\Desktop\IMG-20181102-WA0003.jpg"; // Asegúrate de que este camino sea correcto
 
             // Lee la imagen del archivo
-            byte[] imageBytes = await File.ReadAllBytesAsync(imagePath);
+            byte[] imageBytes = await File.ReadAllBytesAsync(imagePath); // Lee el archivo y convierte a un array de bytes
 
             // Crea la solicitud de imagen
-            var request = new ImagenRequest { Contenido = Google.Protobuf.ByteString.CopyFrom(imageBytes) };
+            var request = new ImagenRequest { Contenido = Google.Protobuf.ByteString.CopyFrom(imageBytes) }; // Crea la solicitud con el contenido de la imagen
 
             // Envía la solicitud y recibe la respuesta
-            var response = await client.GuardarImagenAsync(request);
+            var response = await client.GuardarImagenAsync(request); // Envía la solicitud al servidor
 
             // Imprime el resultado
-            Console.WriteLine(response.Mensaje);
+            Console.WriteLine(response.Mensaje); // Muestra la respuesta en la consola
         }
     }
 }

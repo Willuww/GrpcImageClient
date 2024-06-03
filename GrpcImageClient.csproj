@@ -1,25 +1,32 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
+		<!-- Indica que el proyecto genera un ejecutable -->
 		<TargetFramework>net8.0</TargetFramework>
+		<!-- Establece la versión de .NET -->
 		<ImplicitUsings>enable</ImplicitUsings>
+		<!-- Habilita los usings implícitos -->
 		<Nullable>enable</Nullable>
+		<!-- Habilita las anotaciones de referencia null -->
 	</PropertyGroup>
 
 	<ItemGroup>
+		<!-- Referencia al paquete Google.Protobuf para trabajar con mensajes protobuf -->
 		<PackageReference Include="Google.Protobuf" Version="3.27.0" />
+		<!-- Referencia al paquete Grpc.Net.Client para crear clientes gRPC -->
 		<PackageReference Include="Grpc.Net.Client" Version="2.63.0" />
+		<!-- Referencia al paquete Grpc.Tools para generar código C# a partir de archivos .proto -->
 		<PackageReference Include="Grpc.Tools" Version="2.64.0">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 	</ItemGroup>
-<!-- se tiene que crear una carpeta llamada Protos y se copia el archivo protos del servidor-->
+
 	<ItemGroup>
+		<!-- Incluye el archivo .proto y especifica que se generará código cliente -->
 		<Protobuf Include="Protos\imagen.proto" GrpcServices="Client" />
 	</ItemGroup>
-	<!-- se añade la sintaxis GrpcServices y se especifica que este es el cliente que va 
-	a consumir el grcp de la imagen-->
 
 </Project>
